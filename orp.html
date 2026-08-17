@@ -1,0 +1,28 @@
+<h1>orp studio: hardcore</h1>
+<br>
+<div style="display: flex; gap: 50px">
+	<div>
+	<h3>Coords:</h3>
+	<p>X: <span id="X">1</span></p><input type="number" min="0.00" max="2048.00" id="coordX">
+	<p>Y: <span id="Y">1</span></p><input type="number" min="0.00" max="2048.00" id="coordY">
+	<p>Z: <span id="Z">1</span></p><input type="number" min="0.00" max="2048.00" id="coordZ">
+	</div>
+	<div>
+	<h3>Size:</h3>
+	<p>X: <span id="sX">1</span></p><input type="number" min="0.00" max="2048.00" id="sizeX">
+	<p>Y: <span id="sY">1</span></p><input type="number" min="0.00" max="2048.00" id="sizeY">
+	<p>Z: <span id="sZ">1</span></p><input type="number" min="0.00" max="2048.00" id="sizeZ">
+	</div>
+	<div>
+	<h3>Edit Part:</h3>
+	<p>Part: <span id="sP">1</span></p><input type="number" min="0" max="2048" id="selectPart">
+	<button onclick="editPart()">Confirm</button>
+	</div>
+	<button onclick="addPart()">Add Part</button>
+	<div style="margin: 2px">
+	<p>Output:</p>
+	<pre id="outputJSON"></pre>
+	</div>
+	<button onclick="exportJSON()">EXPORT</button> <!--fin-->
+</div>
+<script src="orp.js"></script>
