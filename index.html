@@ -1,0 +1,57 @@
+<h1><img src="orp.png" width="50px" height="50px">orp studio: hardcore</h1>
+<hr>
+<div style="display: flex; gap: 50px; justify-content: center;">
+<p>Obby Name: </p><input type="text" value="My Obby" id="obbyName">
+<p>Difficulty: </p><input type="text" value="10" id="obbyDifficulty">
+<p>Creator: </p><input type="text" value="john orp" id="obbyCreator"> <!--what-->
+</div>
+<hr>
+<div style="display: flex; gap: 50px; justify-content: center;">
+	<div>
+	<h3>Coords:</h3>
+	<p>X: <span id="X">0</span></p><input type="number" min="0.00" max="2048.00" value="0" id="coordX">
+	<p>Y: <span id="Y">0</span></p><input type="number" min="0.00" max="2048.00" value="0" id="coordY">
+	<p>Z: <span id="Z">0</span></p><input type="number" min="0.00" max="2048.00" value="0" id="coordZ">
+	</div>
+	<div>
+	<h3>Size:</h3>
+	<p>X: <span id="sX">2</span></p><input type="number" min="0.00" max="2048.00" value="2" id="sizeX">
+	<p>Y: <span id="sY">1</span></p><input type="number" min="0.00" max="2048.00" value="1" id="sizeY">
+	<p>Z: <span id="sZ">4</span></p><input type="number" min="0.00" max="2048.00" value="4" id="sizeZ">
+	</div>
+	<div>
+	<h3>Rotation:</h3>
+	<p>X: <span id="rX">0</span></p><input type="number" min="-180.00" max="180.00" value="0" id="rotateX">
+	<p>Y: <span id="rY">0</span></p><input type="number" min="-180.00" max="180.00" value="0" id="rotateY">
+	<p>Z: <span id="rZ">0</span></p><input type="number" min="-180.00" max="180.00" value="0" id="rotateZ">
+	</div>
+	<div>
+	<h3>Color:</h3>
+	<p>X: <span id="color">1</span></p><input type="color" value="#ededed" id="colorInput">
+	</div>
+	<div>
+	<h3>Edit Part:</h3>
+	<p>Part: <span id="sP">1</span></p><input type="number" min="0" max="2048" id="selectPart">
+	<button onclick="editPart()">Confirm</button>
+	</div>
+</div>
+<hr>
+<div>
+	<button onclick="addPart()">Add Part</button>
+	<button onclick="deletePart()">Delete Part</button>
+	<button onclick="exportJSON()">EXPORT</button> <!--fin-->
+	<button onclick="exportText()">See Parts</button>
+</div>
+<p><input type="checkbox" id="download">Download when export?</p>
+<hr>
+<div style="display: flex; gap: 100px; justify-content: center;">
+<div style="margin: 2px">
+	<p>Output:</p>
+	<pre id="outputJSON"></pre>
+</div>
+<div style="margin: 2px">
+	<p>Parts:</p>
+	<pre id="outputText"></pre>
+</div>
+</div>
+<script src="orp.js"></script>
