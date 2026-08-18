@@ -1,10 +1,11 @@
 const game = JSON.parse(localStorage.getItem("obbyData")) //get json file
 const parts = game.Data.Children
 const hue = document.getElementById("hue")
-
+const color = document.getElementById("color")
 const canvas = document.getElementById("preview")
 const ctx = canvas.getContext("2d") //copy straight from google is there a 3d thing
 //draw :scream:
+
 const bigboi = 5
 function shape(part, x, y, width, height) {
 	ctx.fillStyle = part.Properties.Color
@@ -33,8 +34,8 @@ function shape(part, x, y, width, height) {
 	}
 }
 function draw() {
-	ctx.fillStyle = "white" //clear
-	ctx.fillRect(400, 300, 800, 400)
+	ctx.fillStyle = color.value //clear
+	ctx.fillRect(0, 0, canvas.width, canvas.height)
 	let a = 0
 	if (hue.checked) { //top down go brr
 		a = 2
@@ -44,11 +45,11 @@ function draw() {
 	for (const part of parts) { //const soup! mhm
 		const pos = part.Properties.Position
 		const size = part.Properties.Size
-		const boi = 400 + Number(pos[0]) * bigboi //x
-		const boiz = 300 - Number(pos[a]) * bigboi //y or z
-		const boi_width = Number(size[0]) * bigboi
-		const boi_height = Number(size[a]) * bigboi
-		shape(part, boi, boiz, boi_width, boi_height)
+		const width = Number(size[0]) * bigboi
+		const height = Number(size[a]) * bigboi
+		const x = canvas.width / 2 + Number(pos[0]) * bigboi - width / 2
+		const y = canvas.height / 2 - Number(pos[a]) * bigboi - height / 2
+		shape(part, x, y, width, height)
 	}
 }
 draw()
