@@ -73,8 +73,8 @@ const className = {
 	Part: "Part",
     Wedge: "WedgePart",
     CornerWedge: "CornerWedgePart",
-    Ball: "Ball",
-    Cylinder: "Cylinder"
+    Ball: "BallPart",
+    Cylinder: "CylinderPart"
 }
 
 //super annoying thing
