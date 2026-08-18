@@ -1,14 +1,13 @@
 <title>orp studio in mumbai</title>
 <h1><img src="orp.png" width="50px" height="50px">orp studio in mumbai</h1> <!--why i change this to mumbai idk-->
-<link rel="icon" type="image/x-icon" href="orp.png">
 <hr>
 <div style="display: flex; gap: 50px; justify-content: center;">
 <p>Obby Name: </p><input type="text" value="My Obby" id="obbyName">
 <p>Difficulty: </p><input type="text" value="10" id="obbyDifficulty">
-<p>Creator: </p><input type="text" value="john orp" id="obbyCreator"> <!--what-->
+<p>Creator: </p><input type="text" value="john orp" id="obbyCreator"> <!--obby what-->
 </div>
 <hr>
-<div style="display: flex; gap: 50px; justify-content: center;">
+<div style="display: flex; gap: 50px; justify-content: center;"> <!--big boy-->
 	<div>
 	<h3>Coords:</h3>
 	<p>X: <span id="X">0</span></p><input type="number" min="0.00" max="2048.00" value="0" id="coordX">
@@ -27,26 +26,45 @@
 	<p>Y: <span id="rY">0</span></p><input type="number" min="-180.00" max="180.00" value="0" id="rotateY">
 	<p>Z: <span id="rZ">0</span></p><input type="number" min="-180.00" max="180.00" value="0" id="rotateZ">
 	</div>
-	<div>
+<div style="display: flex; gap: 50px; justify-content: center;"> <!--container store color Transparency part type edit part-->
+	<div> <!--color transparent-->
 	<h3>Color:</h3>
 	<p>X: <span id="color">1</span></p><input type="color" value="#ededed" id="colorInput">
+	<h3>Transparency:</h3>
+	<input type="number" min="0.00" max="1.00" value="0" id="transparentInput">
 	</div>
-	<div>
+	<div> <!--part type and edit part-->
+	<h3>Part Type:</h3>
+	<select id="partType">
+	
+    <option value="Part">Part</option>
+    <option value="WedgePart">Wedge</option>
+	<option value="BallPart">Ball</option>
+	<option value="CornerWedgePart">CornerWedgePart</option>
+    <option value="CylinderPart">Cylinder</option>
+	
+	</select>
 	<h3>Edit Part:</h3>
 	<p>Part: <span id="sP">1</span></p><input type="number" min="0" max="2048" id="selectPart">
 	<button onclick="editPart()">Confirm</button>
 	</div>
 </div>
-<hr>
+<div> <!--other section-->
+<h3>Other:</h3>
+<p><input type="checkbox" id="collide">Can't collide?</p> <!--why not can collide stoopido-->
+</div>
+</div>
+<hr> <!--other option-->
 <div>
 	<button onclick="addPart()">Add Part</button>
 	<button onclick="deletePart()">Delete Part</button>
 	<button onclick="exportJSON()">EXPORT</button> <!--fin-->
 	<button onclick="exportText()">See Parts</button>
+	<button onclick="preview()">See 2D Preview</button>
 </div>
 <p><input type="checkbox" id="download">Download when export?</p>
 <hr>
-<div style="display: flex; gap: 100px; justify-content: center;">
+<div style="display: flex; gap: 100px; justify-content: center;"> <!--output-->
 <div style="margin: 2px">
 	<p>Output:</p>
 	<pre id="outputJSON"></pre>
@@ -57,3 +75,4 @@
 </div>
 </div>
 <script src="orp.js"></script>
+
