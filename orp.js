@@ -1,4 +1,4 @@
-//time for some bad codes
+//x, y, z
 const coordX = document.getElementById("coordX")
 const coordY = document.getElementById("coordY")
 const coordZ = document.getElementById("coordZ")
@@ -10,9 +10,12 @@ const sizeZ = document.getElementById("sizeZ")
 const rotateX = document.getElementById("rotateX")
 const rotateY = document.getElementById("rotateY")
 const rotateZ = document.getElementById("rotateZ")
-
+//part thing
 const color = document.getElementById("colorInput")
-
+const transparent = document.getElementById("transparentInput")
+const partType = document.getElementById("partType")
+const cantCollide = document.getElementById("collide")
+//studio thing
 const selectPart = document.getElementById("selectPart")
 
 const output = document.getElementById("outputJSON") //oh no..
@@ -66,6 +69,13 @@ update(color, colorOutput)
 
 //array :fear:
 const parts = []
+const className = {
+	Part: "Part",
+    Wedge: "WedgePart",
+    CornerWedge: "CornerWedgePart",
+    Ball: "Ball",
+    Cylinder: "Cylinder"
+}
 
 //super annoying thing
 const game = new Object()
@@ -77,6 +87,7 @@ game.Data.Children = parts
 game.Data.Name = "Obby"
 game.Data.ClassName = "Folder"
 
+let partCount = 1
 
 //rel script.. :scream:
 function addPart() {
@@ -86,47 +97,55 @@ function addPart() {
 	part.Properties.Size = [sizeX.value, sizeY.value, sizeZ.value]
 	part.Properties.Rotation = [rotateX.value, rotateY.value, rotateZ.value]
 	part.Properties.Color = color.value
-	part.Name = "Part" //change later
-	part.ClassName = "Part"
+	part.Transparency = transparent.value
+	part.Name = partType.value
+	part.ClassName = className[partType.value]
+	part.disabled = cantCollide.checked
 	parts.push(part)
-	console.log(parts) //testing sensei
+	partCount++
 }
 function addSpawn() {
     let spawn = new Object()
     spawn.Properties = new Object()
-    spawn.Properties.Rotation = [0, 0, 0]
+    spawn.Properties.Rotation = [0, 0, 0] //default
     spawn.Properties.Color = "#03bd00" //lol
     spawn.Properties.Position = [coordX.value, coordY.value, coordZ.value]
     spawn.Properties.Size = [1, 1, 1]
+	spawn.Transparency = 0
     spawn.Name = "SpawnLocation"
     spawn.ClassName = "Spawn"
     parts.push(spawn)
 }
 //confirm change
 function editPart() {
-	let id = parts[selectPart.value - 1]
-	id.Properties.Position = [coordX.value, coordY.value, coordZ.value]
-	id.Properties.Size = [sizeX.value, sizeY.value, sizeZ.value]
-	id.Properties.Rotation = [rotateX.value, rotateY.value, rotateZ.value]
-	id.Properties.Color = color.value
-	console.log(id)
+	let part = parts[selectPart.value - 1]
+	part.Properties.Position = [coordX.value, coordY.value, coordZ.value]
+	part.Properties.Size = [sizeX.value, sizeY.value, sizeZ.value]
+	part.Properties.Rotation = [rotateX.value, rotateY.value, rotateZ.value]
+	part.Properties.Color = color.value
+	part.Transparency = transparent.value
+	part.ClassName = className[partType.value]
+	part.disabled = cantCollide.checked
 }
 //load shit
 function loadPart() {
-	let id = parts[selectPart.value - 1] //again again again ahhahahhha
-	coordX.value = id.Properties.Position[0]
-	coordY.value = id.Properties.Position[1] //sori for the repetitive code its 2am
-	coordZ.value = id.Properties.Position[2]
+	let part = parts[selectPart.value - 1] //again again again ahhahahhha
+	coordX.value = part.Properties.Position[0]
+	coordY.value = part.Properties.Position[1] //sori for the repetitive code its 2am
+	coordZ.value = part.Properties.Position[2]
 	
-	sizeX.value = id.Properties.Size[0]
-	sizeY.value = id.Properties.Size[1]
-	sizeZ.value = id.Properties.Size[2] 
+	sizeX.value = part.Properties.Size[0]
+	sizeY.value = part.Properties.Size[1]
+	sizeZ.value = part.Properties.Size[2] 
 	
-	rotateX.value = id.Properties.Rotation[0]
-	rotateY.value = id.Properties.Rotation[1]
-	rotateZ.value = id.Properties.Rotation[2]
+	rotateX.value = part.Properties.Rotation[0]
+	rotateY.value = part.Properties.Rotation[1]
+	rotateZ.value = part.Properties.Rotation[2]
 	
-	color.value = id.Properties.Color
+	color.value = part.Properties.Color
+	transparent.value = part.Transparency
+	partType.value = part.ClassName
+	cantCollide.checked = part.disabled
 }
 selectPart.addEventListener("input", loadPart)
 //delete thing
@@ -157,8 +176,18 @@ function exportText() {
 	a += "Size: " + part.Properties.Size.join(",") + "\n"
 	a += "Rotation: " + part.Properties.Rotation.join(",") + "\n"
 	a += "Color: " + part.Properties.Color +")"+ "\n"
+	a += "Transparency: " + part.Transparency +")"+ "\n"
+	if (part.disabled) {
+		a += "Can collide: False \n"
+	} else {
+		a += "Can collide: True \n"
+	}
 	a += "\n"
 	}
 	textOutput.textContent = a
+}
+function preview() {
+	localStorage.setItem("obbyData", JSON.stringify(game)) //give preview.js the json thingy
+	window.open("preview.html", "_blank", "width=800,height=600")
 }
 addSpawn()
