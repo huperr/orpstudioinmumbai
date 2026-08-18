@@ -1,4 +1,4 @@
-//x, y, z
+//x, y, z   
 const coordX = document.getElementById("coordX")
 const coordY = document.getElementById("coordY")
 const coordZ = document.getElementById("coordZ")
