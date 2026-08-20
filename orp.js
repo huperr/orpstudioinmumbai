@@ -69,13 +69,6 @@ update(color, colorOutput)
 
 //array :fear:
 const parts = []
-const className = {
-	Part: "Part",
-    Wedge: "WedgePart",
-    CornerWedge: "CornerWedgePart",
-    Ball: "BallPart",
-    Cylinder: "CylinderPart"
-}
 
 //super annoying thing
 const game = new Object()
@@ -98,8 +91,9 @@ function addPart() {
 	part.Properties.Rotation = [rotateX.value, rotateY.value, rotateZ.value]
 	part.Properties.Color = color.value
 	part.Transparency = transparent.value
-	part.Name = partType.value
-	part.ClassName = className[partType.value]
+	part.Name = "Part"
+	part.ClassName = "Part"
+	part.Shape = partType.value
 	part.disabled = cantCollide.checked
 	parts.push(part)
 	partCount++
@@ -114,6 +108,7 @@ function addSpawn() {
 	spawn.Transparency = 0
     spawn.Name = "SpawnLocation"
     spawn.ClassName = "Spawn"
+	spawn.Shape = "Part"
     parts.push(spawn)
 }
 //confirm change
@@ -124,7 +119,8 @@ function editPart() {
 	part.Properties.Rotation = [rotateX.value, rotateY.value, rotateZ.value]
 	part.Properties.Color = color.value
 	part.Transparency = transparent.value
-	part.ClassName = className[partType.value]
+	part.ClassName = "Part"
+	part.Shape = partType.value
 	part.disabled = cantCollide.checked
 }
 //load shit
@@ -144,7 +140,7 @@ function loadPart() {
 	
 	color.value = part.Properties.Color
 	transparent.value = part.Transparency
-	partType.value = part.ClassName
+	partType.value = part.Shape
 	cantCollide.checked = part.disabled
 }
 selectPart.addEventListener("input", loadPart)
@@ -171,7 +167,7 @@ function exportText() {
 	let a = ""
 	for (let i = 0; i < parts.length; i++){
 	let part = parts[i]
-	a += part.Name + " ("+part.ClassName +")"+ "\n"
+	a += part.Name + " ("+part.Shape +")"+ "\n"
 	a += "(Position: " + part.Properties.Position.join(",") + "\n"
 	a += "Size: " + part.Properties.Size.join(",") + "\n"
 	a += "Rotation: " + part.Properties.Rotation.join(",") + "\n"
@@ -189,5 +185,9 @@ function exportText() {
 function preview() {
 	localStorage.setItem("obbyData", JSON.stringify(game)) //give preview.js the json thingy
 	window.open("preview.html", "_blank", "width=800,height=600")
+}
+function preview3D() {
+	localStorage.setItem("obbyData", JSON.stringify(game))
+	window.open("a.html", "_blank", "width=800,height=600")
 }
 addSpawn()
